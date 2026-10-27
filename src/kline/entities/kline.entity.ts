@@ -1,0 +1,29 @@
+import 'reflect-metadata';
+import { Entity, PrimaryColumn, Column } from 'typeorm';
+
+@Entity({ name: 'crypto_kline' })
+export class Kline {
+  @PrimaryColumn({ type: 'timestamp' })
+  time!: Date;
+
+  @PrimaryColumn({ type: 'text' })
+  symbol!: string;
+
+  @PrimaryColumn({ type: 'text' })
+  interval!: string;
+
+  @Column({ type: 'double precision' })
+  open!: number;
+
+  @Column({ type: 'double precision' })
+  high!: number;
+
+  @Column({ type: 'double precision' })
+  low!: number;
+
+  @Column({ type: 'double precision' })
+  close!: number;
+
+  @Column({ type: 'numeric' })
+  volume!: string;
+}
