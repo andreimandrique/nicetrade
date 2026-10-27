@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import configuration from './config/configuration.js';
+import { KlineModule } from './kline/kline.module.js';
+import { Kline } from './kline/entities/kline.entity.js';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
-import configuration from './config/configuration.js';
 
 @Module({
   imports: [
@@ -22,10 +24,11 @@ import configuration from './config/configuration.js';
         username: config.getOrThrow('database.username'),
         password: config.getOrThrow('database.password'),
         database: config.getOrThrow('database.database'),
-        entities: [],
+        entities: [Kline],
         synchronize: !config.getOrThrow('isProduction'),
       }),
     }),
+    KlineModule,
   ],
   controllers: [AppController],
   providers: [AppService],
