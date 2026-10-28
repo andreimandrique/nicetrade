@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { CreateKlineDto } from './dto/create-kline.dto.js';
-import { Kline } from './entities/kline.entity.js';
+import { CryptoKlines } from './entities/cryptoKlines.js';
 
 @Injectable()
 export class KlineService {
@@ -12,7 +12,7 @@ export class KlineService {
   ) {}
 
   private get klinesRepository() {
-    return this.dataSource.getRepository(Kline);
+    return this.dataSource.getRepository(CryptoKlines);
   }
 
   create(createKlineDto: CreateKlineDto) {

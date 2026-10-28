@@ -1,8 +1,9 @@
 import 'reflect-metadata';
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { CryptoAsset } from './cryptoAssets.js';
 
 @Entity({ name: 'crypto_kline' })
-export class Kline {
+export class CryptoKlines {
   @PrimaryColumn({ type: 'timestamp' })
   time!: Date;
 
@@ -26,4 +27,10 @@ export class Kline {
 
   @Column({ type: 'numeric' })
   volume!: string;
+
+  @ManyToOne(() => CryptoAsset, (asset) => asset.klines, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'symbol', referencedColumnName: 'symbol' })
+  asset!: CryptoAsset;
 }

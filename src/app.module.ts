@@ -3,9 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './config/configuration.js';
 import { KlineModule } from './kline/kline.module.js';
-import { Kline } from './kline/entities/kline.entity.js';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+import { CryptoKlines } from './kline/entities/cryptoKlines.js';
+import { CryptoAsset } from './kline/entities/cryptoAssets.js';
 
 @Module({
   imports: [
@@ -24,8 +25,8 @@ import { AppService } from './app.service.js';
         username: config.getOrThrow('database.username'),
         password: config.getOrThrow('database.password'),
         database: config.getOrThrow('database.database'),
-        entities: [Kline],
-        synchronize: !config.getOrThrow('isProduction'),
+        entities:[CryptoKlines, CryptoAsset],
+        synchronize: config.getOrThrow('isProduction'),
       }),
     }),
     KlineModule,

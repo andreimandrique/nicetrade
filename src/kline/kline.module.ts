@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { KlineService } from './kline.service.js';
 import { KlineController } from './kline.controller.js';
-import { Kline } from './entities/kline.entity.js';
+import { CryptoKlines } from './entities/cryptoKlines.js';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Kline])],
+  imports: [TypeOrmModule.forFeature([CryptoKlines])],
   controllers: [KlineController],
   providers: [KlineService],
 })
